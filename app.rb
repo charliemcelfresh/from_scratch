@@ -1,5 +1,13 @@
+require 'byebug'
 module App
   def self.call(env)
-    [200, { 'Content-Type' => 'application/json' }, ["Hello from App.call"] ]
+    case env['PATH_INFO']
+    when "/hello"
+      [200, {}, ["Hello!"] ]
+    when "/goodbye"
+      [200, {}, ["Goodbye!"]]
+    else
+      [404, {}, ["Not Found!"]]
+    end
   end
 end
