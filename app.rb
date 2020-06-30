@@ -1,9 +1,11 @@
 require 'byebug'
 require 'yaml'
 require 'sequel'
+require 'slim'
 CONFIG = YAML::load_file(File.join(File.dirname(File.expand_path(__FILE__)), 'config.yml'))
 DB = Sequel.connect(ENV['DATABASE_URL'])
 ROUTES = CONFIG['resources']
+HTML_CONTENT_TYPE = { 'Content-Type' => 'text/html' }
 JSON_CONTENT_TYPE = { 'Content-Type' => 'application/json' }
 TEXT_CONTENT_TYPE = { 'Content-Type' => 'application/text' }
 # path, request_method, content are expressed like this in config.yml
@@ -23,14 +25,24 @@ module App
 
   def self.choose_type(r)
     if r =~ /^\#(.*?)$/
-      [JSON_CONTENT_TYPE, self.send($1)]
+      [HTML_CONTENT_TYPE, self.send($1)]
     else
       [TEXT_CONTENT_TYPE, r]
     end
   end
 
   def self.get_artists
-    DB[:artist].all.to_json
+    artist_page = Tilt.new("views/artist_page.slim")
+    artists = DB[:artist].all
+    layout.render { artist_page.render(Object.new, artists: artists) }
+  end
+  
+  def self.new_artist
+    artist_form = Tilt.new("views/artist_form.slim")
+    layout.render { artist_form.render(self) }
+  end
+
+  def self.create_artist
   end
 
   def self.print_routes
@@ -41,5 +53,10 @@ module App
     }.join("\n")
   end
 
+  def self.layout
+    Tilt.new("views/application.slim")
+  end
+
   print_routes
 end
+

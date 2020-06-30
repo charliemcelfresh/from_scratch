@@ -5,3 +5,5 @@ resources:
     'GET': 'Goodbye!'
   '/artists':
     'GET': '#get_artists'
+  '/new_artist':
+    'GET': '#new_artist'
