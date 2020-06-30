@@ -1,6 +1,5 @@
 require 'byebug'
 require './app'
-
 # run ->(env) {[200, {}, ["Hello from stabby lambda"] ]}
 
 # run ->() {[200, {}, ["Hello from stabby lambda"] ]}
@@ -26,5 +25,4 @@ require './app'
 # run class Object def self.call(env) [200, {}, ["Hello from Object"]] end end; run Object
 
 # def resp(env) [200, {}, ["Hello from curry"] ] end; run method(:resp).curry
-
 run App
