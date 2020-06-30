@@ -1,4 +1,5 @@
 require 'byebug'
+require 'dotenv/load'
 require './app'
 # run ->(env) {[200, {}, ["Hello from stabby lambda"] ]}
 
