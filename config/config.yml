@@ -7,3 +7,5 @@ resources:
     'GET': '#get_artists'
   '/new_artist':
     'GET': '#new_artist'
+  '/create_artist':
+    'POST': '#create_artist'
