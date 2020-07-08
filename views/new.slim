@@ -1,0 +1,6 @@
+<form action="/create_#{resource_name}" method="post"
+- field_names.each do |f|
+  <label for="#{f}">#{f.capitalize}</label>
+  <input type="text" name="#{f}" id="#{f}">
+<input type="submit">
+  />

@@ -1,0 +1,4 @@
+ul
+- collection.each do |attrs|
+  - attrs.delete_if{ |k, v| k =~/_id$/ }.each do |k, v|
+    li=v

@@ -4,8 +4,14 @@ resources:
   '/goodbye':
     'GET': 'Goodbye!'
   '/artists':
-    'GET': '#get_artists'
+    'GET': '#collection'
   '/new_artist':
-    'GET': '#new_artist'
+    'GET': '#new'
   '/create_artist':
-    'POST': '#create_artist'
+    'POST': '#create'
+  '/companys':
+    'GET': '#collection'
+  '/new_company':
+    'GET': '#new'
+  '/create_company':
+    'POST': '#create'
