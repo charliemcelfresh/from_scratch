@@ -1,6 +1,7 @@
 require 'byebug'
 require 'dotenv/load'
 require './app'
+require './custom_header'
 # run ->(env) {[200, {}, ["Hello from stabby lambda"] ]}
 
 # run ->() {[200, {}, ["Hello from stabby lambda"] ]}
@@ -26,4 +27,10 @@ require './app'
 # run class Object def self.call(env) [200, {}, ["Hello from Object"]] end end; run Object
 
 # def resp(env) [200, {}, ["Hello from curry"] ] end; run method(:resp).curry
-run App.new
+
+app = Rack::Builder.new do
+  use CustomHeader
+  run App.new
+end
+
+run app
